@@ -104,6 +104,14 @@ void D2Q5::D2Q5_F()
                 }
             }
         }
+
+        if (k1 % 1000 == 0)
+        {
+            string filename = "data/frame_" + to_string(k1) + ".csv";
+
+            export_results(filename);
+            cout << "Saved frame at step: " << k1 << endl;
+        }
     }
 
     for (int i = 0; i < m; ++i)

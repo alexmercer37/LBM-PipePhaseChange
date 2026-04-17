@@ -1,4 +1,4 @@
-#ifndef _D2Q5_h
+#ifndef _D2Q5_H
 
 #include "main.hpp"
 
@@ -62,6 +62,7 @@ public:
         cc = dx / dt;
         m = Lx / dx + 1;
         n = Ly / dx + 1;
+
         omega = 1 / (0.5 + 3 * alpha * dt / (dx * dx));
         mid = (n - 1) / 2;
 

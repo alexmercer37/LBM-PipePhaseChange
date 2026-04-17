@@ -2,6 +2,7 @@
 #include "../inc/D1Q2.hpp"
 #include "../inc/D1Q3.hpp"
 #include "../inc/D2Q5.hpp"
+#include "../inc/D2Q9.hpp"
 
 int main()
 {
@@ -34,7 +35,8 @@ int main()
 
 #ifdef use_D2Q9
 
-    // D2Q9 test(100.0, 101, 0.0001, 20000, 1, 0.25, 0.0, 1.0);
+    D2Q9 test(100, 100, 1, 0.5, 50000, 1.0 / 3.0, 1.0, 0.1);
+    test.D2Q9_F();
 
 #endif
 
