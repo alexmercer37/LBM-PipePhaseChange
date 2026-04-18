@@ -2,11 +2,11 @@
 
 #include "main.hpp"
 
-// #define D1Q3_F
-// #define D1Q3_T
-// #define D1Q3_Alpha
-// #define D1Q3_S
-// #define D1Q3_V
+#define D1Q3_F
+#define D1Q3_T
+#define D1Q3_Alpha
+#define D1Q3_S
+#define D1Q3_V
 
 class D1Q3
 
