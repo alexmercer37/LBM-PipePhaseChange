@@ -173,8 +173,8 @@ int main() {
 
 <div align="center">
 
-![液相与气相质量演化曲线](data/mass_evolution.png)
-![出口蒸汽质量流量曲线](data/outlet_vapor_flow.png)
+![液相与气相质量演化曲线](LBM_data/mass_evolution.png)
+![出口蒸汽质量流量曲线](LBM_data/outlet_vapor_flow.png)
 
 *上：液相、气相及总质量随迭代步数的演化；下：出口蒸汽质量流量随迭代步数的变化*
 
@@ -186,11 +186,11 @@ int main() {
 
 | 温度场 | 密度场 |
 |:---:|:---:|
-| ![温度场演化](LBM_data/temperature_evolution.gif) | ![密度场演化]((LBM_data/density_evolution.gif) |
+| ![温度场演化](LBM_data/temperature_evolution.gif) | ![密度场演化](LBM_data/density_evolution.gif) |
 
 | 速度场（流线） | 相场（φ） |
 |:---:|:---:|
-| ![流场演化]((LBM_data/velocity_streamlines.gif) | ![相场演化]((LBM_data/phase_field_evolution.gif) |
+| ![流场演化](LBM_data/velocity_streamlines.gif) | ![相场演化](LBM_data/phase_field_evolution.gif) |
 
 </div>
 
