@@ -25,25 +25,27 @@
 使用 D2Q9 离散速度模型，三个场的平衡分布函数形式相同（仅变量不同）：
 
 **密度场**
+
 $$
-f_i^{eq} = \omega_i \rho \left(1 + 3\,\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
+f_i^{eq} = \omega_i \rho \left(1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
 $$
+
 
 **温度场**
 $$
-g_i^{eq} = \omega_i T \left(1 + 3\,\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
+g_i^{eq} = \omega_i T \left(1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
 $$
 
 **相场**
 $$
-h_i^{eq} = \omega_i \phi \left(1 + 3\,\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
+h_i^{eq} = \omega_i \phi \left(1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
 $$
 
 - $\omega_i$：D2Q9 权系数  
 - $\mathbf{e}_i$：离散速度向量  
 - $\rho$：混合密度，由相场线性插值  
   $$
-  \rho = \phi\,\rho_l + (1-\phi)\,\rho_g
+  \rho = \phi\rho_l + (1-\phi)\rho_g
   $$
 - $\phi$：相场，$\phi=1$ 纯液体，$\phi=0$ 纯气体  
 - $T$：温度
@@ -52,12 +54,12 @@ $$
 
 蒸发速率（局部质量源项）：
 $$
-\dot{m} = K_{phase} \cdot \max(T - T_{sat},\,0) \cdot \phi
+\dot{m} = K_{phase} \cdot \text{max}(T - T_{sat},\,0) \cdot \phi
 $$
 
 - $K_{phase}$：相变系数  
 - $T_{sat}$：饱和温度  
-- 仅当 $T > T_{sat}$ 且存在液体（$\phi>0$）时发生蒸发
+- 仅当 $T > T_{sat}$ 且存在液体（phi>0）时发生蒸发
 
 能量方程源项（吸热）：
 $$
@@ -67,7 +69,6 @@ $$
 相场方程源项（液体减少）：
 $$
 S_\phi = -\dot{m}
-$$
 
 ## 🧮 数值方法
 
@@ -85,9 +86,7 @@ $$
 
 ### 迁移步
 
-$$
-f_i(\mathbf{x}+\mathbf{e}_i\Delta t,\,t+\Delta t) = f_i^{new}(\mathbf{x},t)
-$$
+$$ f_i(\mathbf{x} + \mathbf{e}_i \Delta t, t + \Delta t) = f_i^{\text{new}}(\mathbf{x}, t) $$
 （对 $g_i, h_i$ 同理）
 
 ### 宏观量恢复
@@ -106,9 +105,9 @@ $$
 
 | 边界 | 条件 |
 |------|------|
-| **入口 (x=0)** | Dirichlet：固定速度 \(u_{in}\)，温度 \(T_{in}\)，相场 \(\phi=1\)（纯液体） |
+| **入口 (x=0)** | Dirichlet：固定速度 u_in，温度 T_in，相场 φ = 1（纯液体） |
 | **出口 (x=nx-1)** | 零梯度外推（速度、温度、相场、密度） – 非平衡外推分布函数 |
-| **上下壁面 (y=0, y=ny-1)** | 无滑移（速度=0），固定壁温 \(T_{wall}\)，相场零梯度（绝热无质量通量） |
+| **上下壁面 (y=0, y=ny-1)** | 无滑移（速度=0），固定壁温 T_wall，相场零梯度（绝热无质量通量） |
 
 ## 📂 代码结构
 
@@ -118,10 +117,10 @@ $$
 |------------|------|
 | `PipePhaseChangeLBM()` | 构造函数，分配内存，设置初始参数 |
 | `Initialize()` | 初始场：静止、均匀温度、全液相 |
-| `ComputeMdot()` | 计算局部蒸发率 \(\dot{m}\) |
-| `CollisionF/T/Phi()` | 碰撞步，更新分布函数 |
+| `ComputeMdot()` | 计算局部蒸发率 mdot |
+| `CollisionF()` / `CollisionT()` / `CollisionPhi()` | 碰撞步，更新分布函数 |
 | `Streaming()` | 迁移步 |
-| `Macroscopic()` | 计算宏观量（\(\rho,\mathbf{u},T,\phi\)） |
+| `Macroscopic()` | 计算宏观量（ρ, u, T, φ） |
 | `ApplyBoundary()` | 施加边界条件 |
 | `export_results()` | 输出 CSV 数据（当前输出 φ 和 mdot） |
 | `Run()` | 主循环，每 10 步输出一次结果 |
