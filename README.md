@@ -33,19 +33,19 @@ $$
 
 **温度场**
 $$
-g_i^{eq} = \omega_i T (1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2)
+g_i^{eq} = \omega_i T \left(1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
 $$
 
 **相场**
 $$
-h_i^{eq} = \omega_i \phi (1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2)
+h_i^{eq} = \omega_i \phi \left(1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
 $$
 
 - $\omega_i$：D2Q9 权系数  
 - $\mathbf{e}_i$：离散速度向量  
 - $\rho$：混合密度，由相场线性插值  
   $$
-  \rho = \phi\rho_l + (1-\phi)\rho_g
+\rho = \phi\,\rho_l + \left(1-\phi\right)\,\rho_g
   $$
 - $\phi$：相场，$\phi=1$ 纯液体，$\phi=0$ 纯气体  
 - $T$：温度
