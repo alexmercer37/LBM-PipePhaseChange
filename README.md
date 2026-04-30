@@ -25,11 +25,9 @@
 使用 D2Q9 离散速度模型，三个场的平衡分布函数形式相同（仅变量不同）：
 
 **密度场**
-
 $$
 f_i^{eq} = \omega_i \rho \left(1 + 3\mathbf{e}_i\cdot\mathbf{u} + \frac{9}{2}(\mathbf{e}_i\cdot\mathbf{u})^2 - \frac{3}{2}u^2\right)
 $$
-
 
 **温度场**
 $$
@@ -45,7 +43,7 @@ $$
 - $\mathbf{e}_i$：离散速度向量  
 - $\rho$：混合密度，由相场线性插值  
   $$
-\rho = \phi\,\rho_l + \left(1-\phi\right)\,\rho_g
+  \rho = \phi\,\rho_l + \left(1-\phi\right)\,\rho_g
   $$
 - $\phi$：相场，$\phi=1$ 纯液体，$\phi=0$ 纯气体  
 - $T$：温度
@@ -59,7 +57,7 @@ $$
 
 - $K_{phase}$：相变系数  
 - $T_{sat}$：饱和温度  
-- 仅当 $T > T_{sat}$ 且存在液体（phi>0）时发生蒸发
+- 仅当 $T > T_{sat}$ 且存在液体（$\phi>0$）时发生蒸发
 
 能量方程源项（吸热）：
 $$
@@ -69,6 +67,7 @@ $$
 相场方程源项（液体减少）：
 $$
 S_\phi = -\dot{m}
+$$
 
 ## 🧮 数值方法
 
@@ -85,8 +84,9 @@ h_i^{new} = h_i - \frac{\Delta t}{\tau_\phi}(h_i - h_i^{eq}) + \Delta t\,\omega_
 $$
 
 ### 迁移步
-
-$$ f_i(\mathbf{x} + \mathbf{e}_i \Delta t, t + \Delta t) = f_i^{\text{new}}(\mathbf{x}, t) $$
+$$
+f_i(x + e_i \Delta t, t + \Delta t) = f_i^{new}(x, t)
+$$
 （对 $g_i, h_i$ 同理）
 
 ### 宏观量恢复
@@ -166,30 +166,6 @@ int main() {
 
     return 0;
 }
-```
-###  输出文件
-程序每 10 个时间步在 data/ 文件夹生成 CSV 文件，如 results_0.csv, results_10.csv, …
-当前输出列：x, y, rho, phi, mdot（可修改 export_results 添加更多场）。
-
-##  📊 可视化示例（Python）
-
-
-使用提供的 mdot.py 或手动绘图，例如生成 T 云图：
-```python
-#include "LBM.hpp"
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.tri as tri
-
-df = pd.read_csv("data/results_1000.csv")
-triang = tri.Triangulation(df['x'], df['y'])
-plt.tripcolor(triang, df['T'], shading='gouraud', cmap='hot')
-plt.colorbar(label='Evaporation rate (T)')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('T field')
-plt.show()
 ```
 你还可以绘制密度场、相场 φ、速度场的演化动画（参考仓库中的 Rho_graph.py, P_graph.py, V_graph.py）。
 
