@@ -186,11 +186,11 @@ int main() {
 
 | 温度场 | 密度场 |
 |:---:|:---:|
-| ![温度场演化](data/temperature_evolution.gif) | ![密度场演化](data/density_evolution.gif) |
+| ![温度场演化](LBM_data/temperature_evolution.gif) | ![密度场演化]((LBM_data/density_evolution.gif) |
 
 | 速度场（流线） | 相场（φ） |
 |:---:|:---:|
-| ![流场演化](data/velocity_streamlines.gif) | ![相场演化](data/phase_field_evolution.gif) |
+| ![流场演化]((LBM_data/velocity_streamlines.gif) | ![相场演化]((LBM_data/phase_field_evolution.gif) |
 
 </div>
 
